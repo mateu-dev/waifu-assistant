@@ -1,4 +1,7 @@
 const chrono = require("chrono-node");
+const fs = require("fs");
+
+const LIST_OF_COMMANDS = fs.readFileSync()
 
 module.exports.handleRequest = async function (req) {
     req = decodeURIComponent(req.command);
