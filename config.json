@@ -1,5 +1,7 @@
 {
-    "name": "",
+    "name": "Adam",
     "activation-phrase": "Hey <NAME>",
-    "enable-gpt": true
+    "enable-gpt": true,
+    "assistant-http-port": 8080,
+    "gpt-http-port": 8000
 }
