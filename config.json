@@ -3,7 +3,7 @@
     "activation_phrase": "Hey <NAME>",
     "assistant_http_port": 8080,
     "gpt":{
-        "enabled": true,
+        "enabled": false,
         "http-port": 8000,
         "gpt_commands":false
     }
