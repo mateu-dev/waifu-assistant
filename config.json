@@ -1,7 +1,10 @@
 {
     "name": "Adam",
-    "activation-phrase": "Hey <NAME>",
-    "enable-gpt": true,
-    "assistant-http-port": 8080,
-    "gpt-http-port": 8000
+    "activation_phrase": "Hey <NAME>",
+    "assistant_http_port": 8080,
+    "gpt":{
+        "enabled": true,
+        "http-port": 8000,
+        "gpt_commands":false
+    }
 }

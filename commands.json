@@ -1,3 +1,21 @@
 [
-    {"name":"reminder","command":["set reminder <TIME> for <THING>"]}    
+    {
+        "name": "current-time",
+        "commands": [
+            "whats the current time"
+        ],
+        "variables": null,
+        "example_usage":"whats the current time?"
+    },
+    {
+        "name": "reminder",
+        "commands": [
+            "set reminder <TIME> for <THING>"
+        ],
+        "variables": [
+            "TIME",
+            "THING"
+        ],
+        "example_usage":"set reminder in 10 minutes for something"
+    }
 ]
