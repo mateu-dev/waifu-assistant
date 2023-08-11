@@ -1,7 +1,7 @@
 [
     {
         "name": "current-time",
-        "commands": [
+        "templates": [
             "whats the current time"
         ],
         "variables": null,
@@ -9,7 +9,8 @@
     },
     {
         "name": "reminder",
-        "commands": [
+        "templates": [
+            "set reminder for <THING> <TIME>",
             "set reminder <TIME> for <THING>"
         ],
         "variables": [

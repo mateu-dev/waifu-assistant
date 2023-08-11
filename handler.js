@@ -5,11 +5,11 @@ const LIST_OF_COMMANDS = JSON.parse(fs.readFileSync("./commands.json"));
 const CONFIG = JSON.parse(fs.readFileSync("./config.json"));
 
 for (const command of LIST_OF_COMMANDS)
-    command.regex = generateRegExpAndExtractors(command.commands[0]);
+    command.regex = generateRegExpAndExtractors(command.templates[0]);
 
 module.exports.handleRequest = async function (input) {
     input = decodeURIComponent(input.command);
-    const time = chrono.parseDate(input);
+    let response = ""
     console.log(input);
     if (CONFIG.gpt.gpt_commands) {
         // Handle picking commands with gpt
@@ -17,10 +17,21 @@ module.exports.handleRequest = async function (input) {
     }
 
     const current_command = LIST_OF_COMMANDS.find((command) => { return command.regex.regex.test(input) })
-    current_command.variables = current_command.regex.extractors(input);
+    if (current_command) {
+        current_command.variables = current_command.regex.extractors(input);
+        switch (current_command.name) {
+            case "reminder":
+                const mentioned_time = chrono.parseDate(current_command.variables.TIME);
+
+                new Reminder(mentioned_time, current_command);
+
+                response = `Setting reminder for ${current_command.variables.THING} ${current_command.variables.TIME}`;
+                break;
+        }
+    }
+
     console.log(current_command)
 
-    let response = "gpt not enabled";
     if (CONFIG.gpt.enabled) {
         response = await fetch("http://localhost:8000/message?q=" + encodeURIComponent(input));
         response = await response.text();
@@ -55,16 +66,16 @@ function generateRegExpAndExtractors(template) {
     };
 }
 
-
-
-// Fix this later
-function decodeUnicode(text) {
-    decodeURIComponent(text)
-    // return text.replace(/\\u[\dA-Fa-f]{4}|[^\\u]+/g, match => {
-    //     if (match.startsWith("\\u")) {
-    //         return String.fromCharCode(parseInt(match.substr(2), 16));
-    //     } else {
-    //         return eval('"' + match + '"');
-    //     }
-    // });
+//--------------
+class Reminder {
+    constructor(timestamp, command) {
+        const schedule = require("node-schedule");
+        const notifier = require("node-notifier");
+        schedule.scheduleJob(new Date(timestamp), () => {
+            notifier.notify({
+                title: 'Reminder',
+                message: command.variables.THING
+            })
+        })
+    }
 }
