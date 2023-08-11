@@ -1,0 +1,16 @@
+{
+    "name": "Adam",
+    "activation_phrase": "Hey <NAME>",
+    "assistant_http_port": 8080,
+    "gpt": {
+        "enabled": false,
+        "http-port": 8000,
+        "gpt_commands": false
+    },
+    "spotify": {
+        "enabled": true,
+        "client_id": "7884eee0fb874409a0e591e522e87e26",
+        "client_secret": "60724de552b54c94b249eef33c098d0e",
+        "redirect_uri_port": 8001
+    }
+}

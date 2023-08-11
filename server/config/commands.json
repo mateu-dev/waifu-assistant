@@ -1,0 +1,22 @@
+[
+    {
+        "name": "current-time",
+        "templates": [
+            "whats the current time"
+        ],
+        "variables": null,
+        "example_usage":"whats the current time?"
+    },
+    {
+        "name": "reminder",
+        "templates": [
+            "set reminder for <THING> <TIME>",
+            "set reminder <TIME> for <THING>"
+        ],
+        "variables": [
+            "TIME",
+            "THING"
+        ],
+        "example_usage":"set reminder in 10 minutes for something"
+    }
+]
